@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "net.hexagreen.rssearchfix.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "rssearchfix.refmap.json",
+  "mixins": [],
+  "client": [
+    "GridFilterParserMixin",
+    "NameGridFilterMixin",
+    "ItemGridStackMixin",
+    "FluidGridStackMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
