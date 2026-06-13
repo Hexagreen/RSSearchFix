@@ -4,7 +4,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = '1.0.0'
+version = '1.1.0'
 group = 'net.hexagreen.rssearchfix'
 archivesBaseName = 'rssearchfix'
 
@@ -51,17 +51,14 @@ mixin {
 
 repositories {
     maven {
-        name = 'Refined Mods'
-        url = 'https://maven.refinedmods.com/releases'
+        url "https://cursemaven.com"
     }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
 
-    // Refined Storage as compile-only dependency (provided at runtime)
-//    compileOnly fg.deobf('com.refinedmods:refinedstorage:1.12.4')
-     compileOnly files('libs/refinedstorage-1.12.4.jar')
+    implementation fg.deobf("curse.maven:refined-storage-243076:4844585")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
@@ -71,7 +68,7 @@ jar {
         attributes([
             'Specification-Title'     : 'rssearchfix',
             'Specification-Vendor'    : 'hexagreen',
-            'Specification-Version'   : '1',
+            'Specification-Version'   : version,
             'Implementation-Title'    : project.name,
             'Implementation-Version'  : project.jar.archiveVersion,
             'Implementation-Vendor'   : 'hexagreen',

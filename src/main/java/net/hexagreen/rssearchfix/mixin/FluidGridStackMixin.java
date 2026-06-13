@@ -1,7 +1,10 @@
 package net.hexagreen.rssearchfix.mixin;
 
+import net.hexagreen.rssearchfix.EnglishContents;
 import net.hexagreen.rssearchfix.interfaces.IGridStackExtension;
 import com.refinedmods.refinedstorage.screen.grid.stack.FluidGridStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -13,10 +16,12 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(value = FluidGridStack.class, remap = false)
 public abstract class FluidGridStackMixin implements IGridStackExtension {
-
     @Final
     @Shadow
     private FluidStack stack;
+
+    @Shadow
+    private String cachedName;
 
     @Override
     @Unique
@@ -24,9 +29,23 @@ public abstract class FluidGridStackMixin implements IGridStackExtension {
         try {
             Fluid fluid = stack.getFluid();
             ResourceLocation key = ForgeRegistries.FLUIDS.getKey(fluid);
-            return key != null ? key.toString() : "";
-        } catch (Exception e) {
-            return "";
+            if(key != null) cachedName += key.getPath();
+            return cachedName;
+        }
+        catch (Exception e) {
+            return cachedName;
+        }
+    }
+
+    @Override
+    @Unique
+    public String rssearchfix$getEnName() {
+        try {
+            cachedName += MutableComponent.create(new EnglishContents(stack.getTranslationKey(), null, TranslatableContents.NO_ARGS)).getString();
+            return cachedName;
+        }
+        catch (Exception e) {
+            return cachedName;
         }
     }
 }
