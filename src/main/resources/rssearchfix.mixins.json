@@ -9,7 +9,9 @@
     "GridFilterParserMixin",
     "NameGridFilterMixin",
     "ItemGridStackMixin",
-    "FluidGridStackMixin"
+    "FluidGridStackMixin",
+    "LanguageManagerMixin",
+    "TranslatableContentsMixin"
   ],
   "server": [],
   "injectors": {
